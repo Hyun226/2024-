@@ -2,14 +2,14 @@ import pyodbc
 
 def registeruser():
     ## 데이터 베이스 불러오기 the_l 부분 본인 컴퓨터 사용자 명으로 변경
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Hyun\Desktop\Database1.accdb;')
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=데이터 베이스 파일 경로를 적어주세요;')
     cursor = conn.cursor()
 
     # User 테이블의 생성
     cursor.execute('CREATE TABLE User(ID int primary key, 이름 char(50), 성별 char(10), 주소 char(30), 직업 char(10), 출생년도 int);')
 
     ## user.txt 파일에서 불러와서 db에 저장
-    user_data = open(r"C:\Users\Hyun\Desktop\user.txt", 'r')
+    user_data = open(r"user.txt 파일 경로를 적어주세요", 'r')
     for word in user_data:
         list_word = word.replace("\n", "").split(' ')
         id_n = int(list_word[0])
