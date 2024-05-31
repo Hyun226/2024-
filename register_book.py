@@ -1,15 +1,15 @@
 import pyodbc
 
 def registerbook():
-    ## 데이터 베이스 불러오기 the_l 부분 본인 컴퓨터 사용자 명으로 변경
-    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Hyun\Desktop\Database1.accdb;')
+    ## 데이터 베이스 불러오기
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=데이터 베이스 파일 경로를 적어주세요;')
     cursor = conn.cursor()
 
     # Book 테이블의 생성
     cursor.execute('CREATE TABLE Book(ID int primary key, 서명 char(50), 작가 char(30), 출판사 char(30), 출판년도 int, 쪽수 int, 상태 char(10), 대출자 char(30), 예약자 char(30));')
 
     ## book.txt 파일에서 불러와서 db에 저장
-    book_data = open(r"C:\Users\Hyun\Desktop\book.txt", 'r')
+    book_data = open(r"book.txt파일 경로를 적어주세요", 'r')
     for word in book_data:
         list_word = word.replace("\n", "").split(' ')
         id_n = int(list_word[0])
