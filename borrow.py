@@ -8,7 +8,7 @@ def 대출():
     if buser == 0:
         ans = input("회원등록 하시겠습니까? y/n: ")
         if ans == 'y':
-            conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Hyun\Desktop\Database1.accdb;')
+            conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=데이터 베이스 파일 경로를 적어주세요;')
             cursor = conn.cursor()
 
             # id값 가져오기
