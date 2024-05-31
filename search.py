@@ -19,13 +19,13 @@ def 검색():
 
             # 데이터베이스 연결 설정
             conn = pyodbc.connect(
-                r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Hyun\Desktop\Database1.accdb;')
+                r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=데이터 베이스 파일 경로를 적어주세요;')
             cursor = conn.cursor()
 
             # 검색할 값
             search_value = input("검색어를 입력해주세요: ")
 						
-						## 검색할 항목에서 1. 이름을 선택했을 경우
+	    ## 검색할 항목에서 1. 이름을 선택했을 경우
             if num == "1":
                 try:
                     # SELECT 구문
@@ -37,8 +37,7 @@ def 검색():
 
                     # 결과 처리 및 출력
                     cleaned_rows = []
-                    # 가져온 값이의 형태가 "한라현     " 이런식으로 공백이 포함 돼
-                    # 공백을 제거해 주기 위한 코드
+                    # 가져온 값의 형태가 "사용자명     " 이런식으로 공백이 포함 되기 때문 공백을 제거해 주기 위한 코드
                     for row in rows:
                         cleaned_row = tuple(col.strip() if isinstance(col, str) else col for col in row)
                         cleaned_rows.append(cleaned_row)
@@ -46,9 +45,11 @@ def 검색():
                     # 연결 닫기
                     cursor.close()
                     conn.close()
+			
                     # 검색 값 검증
                     # 가져온 값이 없다면 오류가 나오기 때문에 except문으로 넘어가게됨
                     cleaned_rows[0]
+			
                     # 검색 값 반환
                     return cleaned_rows
 
@@ -68,8 +69,7 @@ def 검색():
                     # 결과 가져오기
                     rows = cursor.fetchall()
 
-                    # 결과 처리 및 출력# 가져온 값이의 형태가 "한라현     " 이런식으로 공백이 포함 돼
-                    # 공백을 제거해 주기 위한 코드
+                    # 결과 처리 및 출력# 가져온 값이의 형태가 "이름     " 이런식으로 공백이 포함되기 때문에 공백을 제거해 주기 위한 코드
                    
                     cleaned_rows = []
                     for row in rows:
@@ -79,8 +79,11 @@ def 검색():
                     # 연결 닫기
                     cursor.close()
                     conn.close()
+			
                     # 검색 값 검증
+		    # 가져온 값이 없다면 오류가 나오기 때문에 except문으로 넘어가게 됨
                     cleaned_rows[0]
+			
                     # 검색 값 반환
                     return cleaned_rows
 
@@ -92,6 +95,7 @@ def 검색():
             elif num == "3":
                 try:
                     # SELECT 구문
+		    # 유저테이블에서 검색할 값으로 입력받은 출생년도의 유저 정보를 가져옴
                     select_query = "SELECT * FROM User WHERE 출생년도 = ?"
                     cursor.execute(select_query, (search_value,))
 
@@ -99,6 +103,7 @@ def 검색():
                     rows = cursor.fetchall()
 
                     # 결과 처리 및 출력
+			# 가져온 값의 형태가 "사용자명     " 이런식으로 공백이 포함 되기 때문 공백을 제거해 주기 위한 코드
                     cleaned_rows = []
                     for row in rows:
                         cleaned_row = tuple(col.strip() if isinstance(col, str) else col for col in row)
@@ -107,8 +112,11 @@ def 검색():
                     # 연결 닫기
                     cursor.close()
                     conn.close()
+			
                     # 검색 값 검증
+			# 가져온 값이 없다면 오류가 나오기 때문에 except문으로 넘어가게 됨
                     cleaned_rows[0]
+			
                     # 검색 값 반환
                     return cleaned_rows
 
@@ -133,7 +141,7 @@ def 검색():
 
             # 데이터베이스 연결 설정
             conn = pyodbc.connect(
-                r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\Hyun\Desktop\Database1.accdb;')
+                r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=데이터 베이스 파일 경로를 적어주세요;')
             cursor = conn.cursor()
 
             # 검색할 값
@@ -142,6 +150,7 @@ def 검색():
             if num == "1":
                 try:
                     # SELECT 구문
+			# 책 테이블에서 검색할 값으로 입력받은 서명의 책 정보를 가져옴
                     select_query = "SELECT * FROM Book WHERE 서명 = ?"
                     cursor.execute(select_query, (search_value,))
 
@@ -149,6 +158,7 @@ def 검색():
                     rows = cursor.fetchall()
 
                     # 결과 처리 및 출력
+			# 가져온 값의 형태가 "책 제목     " 이런식으로 공백이 포함 되기 때문 공백을 제거해 주기 위한 코드
                     cleaned_rows = []
                     for row in rows:
                         cleaned_row = tuple(col.strip() if isinstance(col, str) else col for col in row)
@@ -157,8 +167,11 @@ def 검색():
                     # 연결 닫기
                     cursor.close()
                     conn.close()
+			
                     # 검색 값 검증
+			# 가져온 값이 없다면 오류가 나오기 때문에 except문으로 넘어가게 됨
                     cleaned_rows[0]
+			
                     # 검색 값 반환
                     return cleaned_rows
 
@@ -261,7 +274,7 @@ def 대출반납검색():
     2. 회원명 조회
     """)
     use_list = []
-    use_data = open("use.txt", 'r')
+    use_data = open("use.txt파일 경로를 적어주세요", 'r')
     for word in use_data:
         list_word = word.replace("\n", "").split('|')
         use_list.append(list_word)
